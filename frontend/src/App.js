@@ -28,7 +28,7 @@ const getImages=async ()=>{
     console.log(response);
     setImageList(response.data)
     setLoading(false)
-    console.log(imageList)
+    // console.log(imageList)
   
   })
   .catch(function (error) {
@@ -74,18 +74,20 @@ const SubmitHandler = async(e)=>{
 
 
         </form>
-        {console.log(imageList)}
+        
 
         <div className="class-container">
-          <img src={`./uploads/frontend.png`}/>
-{/* {loading ===false && imageList !== ""?
+ {/* {console.log("hello",imageList)}     */}
+
+{/* {imageList!==""?setLoading(false):setLoading(true)}      */}
+{loading ===false  && imageList !==""?
 
 imageList.map((image_name)=>(
   
   <img id={image_name} class="preview-image"src={`./uploads/${image_name}`}/>   
   
 )
-):""} */}
+):""}
 </div>
     </div>
   );
