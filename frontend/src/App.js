@@ -18,7 +18,7 @@ function App() {
 
 useEffect(()=>{
 getImages();
-},[])
+},[imageList])
 
 
 const getImages=async ()=>{
