@@ -7,7 +7,6 @@ const path = require('path');
 const { features } = require('process');
 
 
-dotenv.config();
 
 const PORT = process.env.PORT || 5000    // Step 1
 
@@ -33,12 +32,6 @@ app.post('/upload', (req, res) => {
 
 
 const dir= path.join(`${__dirname}/frontend/public/uploads/`)
-
-router.use(function(req, res) {
-	res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
-});
-
-app.use(express.static('client/build'));
 
 app.get("/uploads",(req,res)=>{
     fs.readdir(dir,(err,files)=>{
