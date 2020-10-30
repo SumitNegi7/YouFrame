@@ -77,7 +77,7 @@ const SubmitHandler = async(e)=>{
         {console.log(imageList)}
 
         <div className="class-container">
-{loading ==false?
+{loading ===false && imageList !== ""?
 
 imageList.map((image_name)=>(
   
