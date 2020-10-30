@@ -6,7 +6,7 @@ import React from "react";
 
 function App() {
   
-  const [imageList,setImageList] = useState(""); 
+  const [imageList,setImageList] = useState([]); 
   const [loading,setLoading]=useState(true)
 
 // const onChange = (e) =>{
@@ -80,7 +80,7 @@ const SubmitHandler = async(e)=>{
  {console.log(imageList)}    
 
 {/* {imageList!==""?setLoading(false):setLoading(true)}      */}
-{loading ===false  && imageList !==""?
+{loading ===false  && imageList !==[]?
 
 imageList.map((image_name)=>(
   
