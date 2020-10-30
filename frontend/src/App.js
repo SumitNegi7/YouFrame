@@ -25,7 +25,7 @@ const getImages=async ()=>{
   const response = await axios.get("/uploads")
   .then(function (response) {
     // handle success
-    console.log(response);
+    // console.log(response);
     setImageList(response.data)
     setLoading(false)
     // console.log(imageList)
@@ -77,7 +77,7 @@ const SubmitHandler = async(e)=>{
         
 
         <div className="class-container">
- {/* {console.log("hello",imageList)}     */}
+ {console.log(imageList)}    
 
 {/* {imageList!==""?setLoading(false):setLoading(true)}      */}
 {loading ===false  && imageList !==""?
