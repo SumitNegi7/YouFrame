@@ -1,4 +1,4 @@
-const { DH_NOT_SUITABLE_GENERATOR } = require('constants');
+
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const fs=require("fs");
@@ -8,7 +8,7 @@ const { features } = require('process');
 
 
 
-const PORT = process.env.PORT || 5000    // Step 1
+const PORT = process.env.PORT || 5000    
 
 app.use(fileUpload());
 app.use(express.json())
@@ -19,22 +19,36 @@ app.post('/upload', (req, res) => {
   }
 
   const file = req.files.file;
+  // Checking for file formats which are supported
 
+  if(file.name.includes(".jpg") || file.name.includes(".jpeg") || file.name.includes(".JPEG") || file.name.includes(".png")
+  ||file.name.includes(".JPG") || file.name.includes(".PNG") ||file.name.includes(".gif") || file.name.includes(".GIF"))
+  
+  {
+  
+  // movinf file to uploads directory
   file.mv(`${__dirname}/frontend/public/uploads/${file.name}`, err => {
     if (err) {
-      console.error(err);
+      // console.error(err);
       return res.status(500).send(err);
     }
 
     res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
-  });
+  });}
+  else{
+    return res.status(401).json({ msg: "Please upload an image format" });
+  }
 });
 
 
 const dir= path.join(`${__dirname}/frontend/public/uploads/`)
 
-app.get("/uploads",(req,res)=>{
-    fs.readdir(dir,(err,files)=>{
+app.get("/upload",(req,res)=>{
+
+
+  //Sorting the list of the files by date 
+
+  fs.readdir(dir,(err,files)=>{
 
         const  fil = files.map(function (fileName) {
            return {
@@ -46,8 +60,7 @@ app.get("/uploads",(req,res)=>{
                return b.time - a.time; })
            .map(function (v) {
                return v.name; });
-               console.log(fil)
-
+              
                res.status(200).send(fil) 
 
      

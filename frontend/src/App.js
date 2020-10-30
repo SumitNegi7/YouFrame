@@ -1,6 +1,5 @@
-import logo from './logo.svg';
-import './App.css';
 import {useState,useEffect } from 'react';
+import './App.css';
 import axios from "axios";
 import React from "react";
 
@@ -8,13 +7,7 @@ function App() {
   
   const [imageList,setImageList] = useState([]); 
   const [loading,setLoading]=useState(true)
-
-// const onChange = (e) =>{
-//   console.log(e.target.files[0])
-//   // setFile(e.target.files[0]);
-//   // setFilename(e.target.files.name);
-// }
-
+  const [error,setError]= useState("");
 
 useEffect(()=>{
 getImages();
@@ -22,18 +15,17 @@ getImages();
 
 
 const getImages=async ()=>{
-  const response = await axios.get("/uploads")
+  const response = await axios.get("/upload")
   .then(function (response) {
-    // handle success
-    // console.log(response);
+    // handles success
+   
     setImageList(response.data)
     setLoading(false)
-    // console.log(imageList)
-  
+    
   })
   .catch(function (error) {
-    // handle error
-    console.log(error);
+    // handles error
+    setError(error.response.data.msg)
   })
 }
 
@@ -53,10 +45,10 @@ const SubmitHandler = async(e)=>{
     
   } catch (error) {
     if(error.response.status === 500){
-      console.log("There was a problem with the server")
+      setError("There was a problem with the server")
     }
     else{
-      console.log("err.response.data.msg")
+      setError(error.response.data.msg)
     }
 
 
@@ -68,24 +60,29 @@ const SubmitHandler = async(e)=>{
     <div className="App">
       
       <form   >
+
+        {/* setting text of file to Upload */}
       <label for="files" className="btn-upload">Upload</label>
-<input style={{visibility:"hidden"}} id="files" type="file" onChange={SubmitHandler} />
+<input style={{visibility:"hidden"}} id="files" type="file" accept="image/x-png,image/gif,image/jpeg" onChange={SubmitHandler} />
 
 
 
         </form>
-        
-
+        {/* Error Handling */}
+<div className="error-container">
+  {error !==""?error:""}
+  </div>
         <div className="class-container">
- {console.log(imageList)}    
 
-{/* {imageList!==""?setLoading(false):setLoading(true)}      */}
 {loading ===false  && imageList !==[]?
-
+// mapping images 
 imageList.map((image_name)=>(
-  
-  <img id={image_name} class="preview-image"src={`./uploads/${image_name}`}/>   
-  
+  <div className="img-container">
+      <img id={image_name} class="preview-image"src={`./uploads/${image_name}`}/> 
+        {/* id of className as given in description */}
+        
+        <p className="image-desc">{image_name}</p>  
+ </div>
 )
 ):""}
 </div>
