@@ -48,7 +48,7 @@ app.get("/uploads",(req,res)=>{
                return v.name; });
                console.log(fil)
 
-               res.status(200).json({images:fil}) 
+               res.status(200).send(fil) 
 
      
 });
