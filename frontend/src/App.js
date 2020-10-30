@@ -77,14 +77,15 @@ const SubmitHandler = async(e)=>{
         {console.log(imageList)}
 
         <div className="class-container">
-{loading ===false && imageList !== ""?
+          <img src={`./uploads/frontend.png`}/>
+{/* {loading ===false && imageList !== ""?
 
 imageList.map((image_name)=>(
   
   <img id={image_name} class="preview-image"src={`./uploads/${image_name}`}/>   
   
 )
-):""}
+):""} */}
 </div>
     </div>
   );
