@@ -1,0 +1,44 @@
+*{
+  box-sizing: border-box;
+  margin-top:7.5px;
+}
+
+
+.class-container{
+  /* background-color: bisque; */
+  width:100vw;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  grid-gap:10px;
+}
+
+img{
+  height:300px;
+  width:300px;
+  border-radius:10px;
+}
+
+.files{
+  display:none;
+ 
+}
+
+.btn-upload{
+  background-image: url(./upload.svg);
+  color:rgb(12, 121, 184);
+  border:2px solid black;
+  background-repeat: none;
+  height:50px;
+  display: inline-block;
+  align-content: center;
+  position:relative;
+  left:50%;
+}
+
+@media only screen and (max-width: 600px) {
+  .class-container {
+    background-color: lightblue;
+    grid-template-columns:1fr ;
+  }
+}
